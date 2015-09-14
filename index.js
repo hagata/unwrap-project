@@ -6,8 +6,6 @@ var exec = require('child_process').exec;
 var storage = require('./utils/storage');
 
 
-console.log('Setup complete');
-
 unwrap
   .command('list')
   .alias('ls')
