@@ -21,3 +21,25 @@ var persistData = JSON.parse(persistFile);
     }
   }
 }
+
+
+module.exports.add = function(projectName, directory) {
+
+  //Check if a directory is supplied, otherwise set the current directory 
+  if (!directory){
+    directory = process.cwd()
+  }
+  
+  var newProject = {
+    "project": projectName,
+    "directory": directory
+  }
+
+  //TODO: Prompt for confirmation?
+  persistData.projects.push(newProject)
+  var writePersist = JSON.stringify(persistData,null,2);
+  fs.writeFileSync('./persist.json', writePersist)
+
+  console.log('Added - ' + projectName);
+  
+}

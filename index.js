@@ -20,4 +20,13 @@ unwrap
     }
   })
 
+
+  unwrap
+    .command('add <name> [directory]')
+    .alias('a')
+    .description('Adds a project to unwrap')
+    .action(function(name, directory) {
+      storage.add(name, directory)
+    })
+
   unwrap.parse(process.argv);

@@ -1,12 +1,24 @@
 {
   "projects": [
-  {
-    "project":"project1",
-    "directory":"/Users/genki-book/Documents/_Devbox/unwrap-project-2"
+    {
+      "project": "project1",
+      "directory": "/Users/genki-book/Documents/_Devbox/unwrap-project-2"
     },
     {
-      "project":"project2",
-      "directory":"/Users/genki-book/Documents/_Devbox/unwrap-project-2"
+      "project": "project2",
+      "directory": "/Users/genki-book/Documents/_Devbox/unwrap-project-2"
+    },
+    {
+      "project": "projj",
+      "directory": "/h/dir/Unwr"
+    },
+    {
+      "project": "defaultDirProject",
+      "directory": "/Users/genki-book/Documents/_Devbox/unwrap-project"
+    },
+    {
+      "project": "project5",
+      "directory": "/Users/genki-book/Documents/_Devbox/unwrap-project"
     }
-    ]
-  }
+  ]
+}
