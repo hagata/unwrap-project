@@ -7,10 +7,17 @@ var persistData = JSON.parse(persistFile);
  * List Command returns the list of projects
  * @return {array} Returns the list of project names
  */
-module.exports.list = function() {
+ module.exports.list = function(option) {
 
   console.log('Projects: ');
   for (index in persistData.projects){
-    console.log(" - " + persistData.projects[index].name);
+    var projecetName = persistData.projects[index].project;
+    var projectDirectory = persistData.projects[index].directory;
+
+    if (option == 'dir'){
+      console.log(' - ' + projecetName + ' | ' + projectDirectory);
+    }else{
+      console.log(" - " + projecetName)
+    }
   }
 }

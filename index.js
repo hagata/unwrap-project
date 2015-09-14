@@ -11,8 +11,13 @@ unwrap
   .alias('ls')
   .description('List all projects that are saved in Unwrap-Projects')
   .option('-d, --directories', 'show the root directories of each project in the list')
-  .action(function() {
-    storage.list();
+  .action(function(options) {
+    if (options.directories){
+      storage.list('dir');
+      console.log('With Option Directories');
+    }else {
+      storage.list();
+    }
   })
 
   unwrap.parse(process.argv);
