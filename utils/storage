@@ -7,7 +7,7 @@ var persistData = JSON.parse(persistFile);
  * List Command returns the list of projects
  * @return {array} Returns the list of project names
  */
- module.exports.list = function(option) {
+module.exports.list = function(option) {
 
   console.log('Projects: ');
   for (index in persistData.projects){
@@ -37,9 +37,30 @@ module.exports.add = function(projectName, directory) {
 
   //TODO: Prompt for confirmation?
   persistData.projects.push(newProject)
-  var writePersist = JSON.stringify(persistData,null,2);
-  fs.writeFileSync('./persist.json', writePersist)
+  this.writePersist(persistData);
 
   console.log('Added - ' + projectName);
   
+}
+
+module.exports.remove = function(projectName) {
+  console.log('Removing Project… \"' + projectName + '\"\n');
+  //does that proj exist?
+  var findProject = function(find) {
+    return find.project;
+  }
+  var projectIndex = persistData.projects.map(findProject).indexOf(projectName);
+
+  //if so, remove it
+  if(projectIndex > -1){
+    persistData.projects.splice(projectIndex, 1)
+    this.writePersist(persistData);
+  }else{
+   console.log(' - \"' + projectName + '\"" does not exist.');
+ }
+};
+
+module.exports.writePersist = function(updatedData) {
+  var writePersist = JSON.stringify(updatedData, null, 2);
+  fs.writeFileSync('./persist.json', writePersist);
 }

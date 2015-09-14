@@ -6,7 +6,7 @@ var exec = require('child_process').exec;
 var storage = require('./utils/storage');
 
 
-unwrap
+unwrap //list
   .command('list')
   .alias('ls')
   .description('List all projects that are saved in Unwrap-Projects')
@@ -21,12 +21,20 @@ unwrap
   })
 
 
-  unwrap
-    .command('add <name> [directory]')
-    .alias('a')
-    .description('Adds a project to unwrap')
-    .action(function(name, directory) {
-      storage.add(name, directory)
-    })
+unwrap //add
+  .command('add <name> [directory]')
+  .alias('a')
+  .description('Adds a project to unwrap')
+  .action(function(name, directory) {
+    storage.add(name, directory)
+  })
 
-  unwrap.parse(process.argv);
+unwrap //remove
+  .command('remove <project>')
+  .alias('rm')
+  .description('Removes a project from the unwrap list')
+  .action(function(project) {
+    storage.remove(project)
+  })
+
+unwrap.parse(process.argv);
