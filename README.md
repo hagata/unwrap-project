@@ -27,10 +27,11 @@ The unwrap.json file may contain urls, programs, and terminal commands as follow
       "Safari"
     ],
     "files":[
-      ""
+      "wireframe.ai"
     ],
-    "directories":[
-      ""
+    "folders":[
+      ".",
+      "assets"
     ],
     "commands":[
       "gulp sass",
@@ -41,8 +42,9 @@ The unwrap.json file may contain urls, programs, and terminal commands as follow
 ```
 - Urls: Can be any valid url. It will be launched in your default browser.
 - Apps: applications can be any installed app in your application folder. Use the same name & spelling found in the application folder. *opened using open -a applicationName*
-- Commands: commands can be any valid unix command
-
+- Commands: commands can be any valid unix command.
+- Files: files are referenced from the root directory and opened with their default app. 
+- Folders: any directory listed in folders will open a Finder window at that location.
 
 
 ##commands

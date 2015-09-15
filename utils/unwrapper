@@ -12,9 +12,9 @@ module.exports.openProject = function(projectName, options) {
   }
   var projectIndex = projectList.projects.map(findProject).indexOf(projectName);
     //if it exists, look inside the saved directory
-  if(projectIndex > -1){
-    var projectDir = projectList.projects[projectIndex].directory;
-    var unwrapConfig = projectDir+'/unwrap.json'
+    if(projectIndex > -1){
+      var projectDir = projectList.projects[projectIndex].directory;
+      var unwrapConfig = projectDir+'/unwrap.json'
     // does that dir have an unwrap file?
     fs.stat(unwrapConfig, function(err, stats) {
       if (!err){
@@ -22,55 +22,54 @@ module.exports.openProject = function(projectName, options) {
         var readUnwrapFile = fs.readFileSync(unwrapConfig);
         var unwrapped = JSON.parse(readUnwrapFile);
         //execute the commands and things inside unwrap
-        if(unwrapped.urls){
-          unwrapped.urls.forEach(function(element, index, array){
-            var execfunc = 'open ' + element
-            // exec(execfunc, function(err, stdout, stdin) {
-            //   //callback
-            // });
-            console.log('  Opening URL -  %s', element);
-          });
-        }
-        if(unwrapped.apps){
-          unwrapped.apps.forEach(function(app) {
-            var execfunc = 'open -a ' + app;
-            // exec(execfunc, function(err, stdout, stdin) {
-            //   //callback
-            // });
-            console.log('  Launching -  %s', app);
-          })
-        }
-        if(unwrapped.commands){
-          //Want a new window to open and have things exec there?
-          unwrapped.commands.forEach(function(command) {
-          //   exec(command,{cwd: projectDir })
-          //   console.log(command);
-          })
-        }
         if(unwrapped.files){
           unwrapped.files.forEach(function(file) {
             var openFile = 'open ' + file;
-            // exec(openFile,{cwd: projectDir }, function(err, stdout, stdin){
-            //   if(err) console.log(err);
-            // }); 
+            exec(openFile,{cwd: projectDir }, function(err, stdout, stdin){
+              if(err) console.log(err);
+            }); 
             console.log('  Opening File -  %s', file);
 
           })
         }
         if(unwrapped.folders) {
           unwrapped.folders.forEach(function(folder) {
+            var openFolder = 'open ' + folder;
+            exec(openFolder, {cwd: projectDir} );
             console.log('  Opening Finder at -  %s', folder);
           })
         }
+        if(unwrapped.urls){
+          unwrapped.urls.forEach(function(element, index, array){
+            var execfunc = 'open ' + element
+            exec(execfunc);
+            console.log('  Opening URL -  %s', element);
+          });
+        }
+        if(unwrapped.apps){
+          unwrapped.apps.forEach(function(app) {
+            var execfunc = 'open -a ' + app;
+            exec(execfunc);
+            console.log('  Launching -  %s', app);
+          })
+        }
+        if(unwrapped.commands){
+          //Want a new window to open and have things exec there?
+          unwrapped.commands.forEach(function(command) {
+            exec(command,{cwd: projectDir })
+            console.log(command);
+          })
+        }
+
 
       }else{ console.log('\n Uh Oh! There is no unwrap.json file at… \n  ' +err.path)}
-  })
+    })
     //handle check for file
   //find and JSON.parse the unwrap.json file
   /**
    * Option handing.
    */
-  if(options.newwindow) {
+   if(options.newwindow) {
     var execFunc = 'open -a Terminal ' + projectDir;
     exec(execFunc)
   }
