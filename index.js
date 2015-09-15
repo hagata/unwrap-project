@@ -6,6 +6,8 @@ var exec = require('child_process').exec;
 var storage = require('./utils/storage');
 var unwrapper = require('./utils/unwrapper');
 
+unwrap
+  .version('0.5.0');
 
 unwrap //list
   .command('list')
