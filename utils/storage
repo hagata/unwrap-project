@@ -23,6 +23,14 @@ module.exports.list = function(option) {
 }
 
 
+/**
+ * Accesses and parses the persistData json file
+ * @return {object} the json object from persist.json
+ */
+module.exports.readPersist = function() {
+  return persistData;
+}
+
 module.exports.add = function(projectName, directory) {
 
   //Check if a directory is supplied, otherwise set the current directory 

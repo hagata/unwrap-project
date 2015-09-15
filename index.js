@@ -4,6 +4,7 @@ var unwrap = require('commander');
 var fs = require('fs');
 var exec = require('child_process').exec;
 var storage = require('./utils/storage');
+var unwrapper = require('./utils/unwrapper');
 
 
 unwrap //list
@@ -37,4 +38,11 @@ unwrap //remove
     storage.remove(project)
   })
 
+unwrap //open //default command
+  .command('* [name]')
+  .alias('open')
+  .description('Open a saved project by name')
+  .action(function(name) {
+    unwrapper.openProject(name);
+  })
 unwrap.parse(process.argv);

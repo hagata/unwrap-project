@@ -11,6 +11,14 @@
     {
       "project": "writtenProject",
       "directory": "/Users/genki-book/Documents/_Devbox/unwrap-project"
+    },
+    {
+      "project": "twg",
+      "directory": "/Users/genki-book/document/_Huge/"
+    },
+    {
+      "project": "think",
+      "directory": "/Users/genki-book/Documents/_Projects/_Huge/gthink-developers"
     }
   ]
 }

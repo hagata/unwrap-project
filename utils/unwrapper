@@ -1,0 +1,64 @@
+var fs = require('fs');
+var storage = require('../utils/storage')
+var exec = require('child_process').exec;
+
+module.exports.openProject = function(projectName) {
+  console.log('\n Unwrapping project……\"'+ projectName +'\"\n');
+
+  var projectList = storage.readPersist()
+
+  var findProject = function(find) {
+    return find.project;
+  }
+  var projectIndex = projectList.projects.map(findProject).indexOf(projectName);
+    //if it exists, look inside the saved directory
+  if(projectIndex > -1){
+    var projectDir = projectList.projects[projectIndex].directory;
+    var unwrapConfig = projectDir+'/unwrap.json'
+    // does that dir have an unwrap file?
+    fs.stat(unwrapConfig, function(err, stats) {
+      if (!err){
+        //go ahead and read the unwrap.json
+        var readUnwrapFile = fs.readFileSync(unwrapConfig);
+        var unwrapped = JSON.parse(readUnwrapFile);
+        //execute the commands and things inside unwrap
+        if(unwrapped.urls){
+          unwrapped.urls.forEach(function(element, index, array){
+            var execfunc = 'open ' + element
+            exec(execfunc, function(err, stdout, stdin) {
+              //callback
+            });
+            console.log('  Opening URL -  %s', element);
+          });
+        }
+        if(unwrapped.apps){
+          unwrapped.apps.forEach(function(app) {
+            var execfunc = 'open -a ' + app;
+            exec(execfunc, function(err, stdout, stdin) {
+              //callback
+            });
+            console.log('  Launching -  %s', app);
+          })
+        }
+        if(unwrapped.commands){
+          unwrapped.commands.forEach(function(command) {
+            exec(command)
+            console.log(command);
+          })
+        }
+
+      }else{ console.log('\n Uh Oh! There is no unwrap.json file at… \n  ' +err.path)}
+  })
+    //handle check for file
+  //find and JSON.parse the unwrap.json file
+
+  //execute the commands
+  //finish
+
+}else{
+  console.log('Oops, That project doesn\'t exist');
+}
+  //find the coressponding project
+  //
+  //doesn't exist? oops try again
+}
