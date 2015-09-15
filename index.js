@@ -42,6 +42,7 @@ unwrap //open //default command
   .command('* [name]')
   .alias('open')
   .option('-n, --newwindow', 'Open a new Terminal window at the project Root directory' )
+  .option('-t, --tab', 'Open a new Terminal tab at the project Root directory' )
   .description('Open a saved project by name')
   .action(function(name, options) {
     unwrapper.openProject(name, options);

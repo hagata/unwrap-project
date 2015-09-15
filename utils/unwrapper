@@ -74,6 +74,11 @@ module.exports.openProject = function(projectName, options) {
     var execFunc = 'open -a Terminal ' + projectDir;
     exec(execFunc)
   }
+  if(options.tab) {
+    console.log('open a new tab');
+    var execFunc = 'osascript -e \'tell application "Terminal" to activate\' -e \'tell application \"System Events\" to tell process \"Terminal\" to keystroke \"t\" using command down\''
+    exec(execFunc)
+  }
 
   //execute the commands
   //finish

@@ -15,7 +15,7 @@ Each project in Unwrap will need to have an unwrap.json file containing the info
 The unwrap.json file must be in the root directory of the project (the same one defined when adding the project)
 
 The unwrap.json file may contain urls, programs, and terminal commands as follows:
-```
+```json
   {
     "urls":[
       "http://google.com",
@@ -77,6 +77,18 @@ This is the default action for `unwrap`, meaning you don't need to use `open` if
 
 The open command will search the root directory of the project for the unwrap.json file. 
 
+*Options*
+`unwrap open -newwindow projectName` or `unwrap open -n projectName`
+The -n | -newwindow option will unwrap the project and open a new terminal window at the project root directory.
+
+`unwrap open -tab projectName` or `unwrap open -t projectName`
+The -t | -tab option will unwrap the project and open a new terminal tab in the same Terminal window at the project root directory. 
+
 ###help
 `unwrap --help` or `unwrap -h`
+
+to get help for each command use the command, followed by ` -h`
+```
+unwrap open -h
+```
 
