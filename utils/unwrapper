@@ -2,7 +2,7 @@ var fs = require('fs');
 var storage = require('../utils/storage')
 var exec = require('child_process').exec;
 
-module.exports.openProject = function(projectName) {
+module.exports.openProject = function(projectName, options) {
   console.log('\n Unwrapping project……\"'+ projectName +'\"\n');
 
   var projectList = storage.readPersist()
@@ -25,25 +25,41 @@ module.exports.openProject = function(projectName) {
         if(unwrapped.urls){
           unwrapped.urls.forEach(function(element, index, array){
             var execfunc = 'open ' + element
-            exec(execfunc, function(err, stdout, stdin) {
-              //callback
-            });
+            // exec(execfunc, function(err, stdout, stdin) {
+            //   //callback
+            // });
             console.log('  Opening URL -  %s', element);
           });
         }
         if(unwrapped.apps){
           unwrapped.apps.forEach(function(app) {
             var execfunc = 'open -a ' + app;
-            exec(execfunc, function(err, stdout, stdin) {
-              //callback
-            });
+            // exec(execfunc, function(err, stdout, stdin) {
+            //   //callback
+            // });
             console.log('  Launching -  %s', app);
           })
         }
         if(unwrapped.commands){
+          //Want a new window to open and have things exec there?
           unwrapped.commands.forEach(function(command) {
-            exec(command)
-            console.log(command);
+          //   exec(command,{cwd: projectDir })
+          //   console.log(command);
+          })
+        }
+        if(unwrapped.files){
+          unwrapped.files.forEach(function(file) {
+            var openFile = 'open ' + file;
+            // exec(openFile,{cwd: projectDir }, function(err, stdout, stdin){
+            //   if(err) console.log(err);
+            // }); 
+            console.log('  Opening File -  %s', file);
+
+          })
+        }
+        if(unwrapped.folders) {
+          unwrapped.folders.forEach(function(folder) {
+            console.log('  Opening Finder at -  %s', folder);
           })
         }
 
@@ -51,6 +67,13 @@ module.exports.openProject = function(projectName) {
   })
     //handle check for file
   //find and JSON.parse the unwrap.json file
+  /**
+   * Option handing.
+   */
+  if(options.newwindow) {
+    var execFunc = 'open -a Terminal ' + projectDir;
+    exec(execFunc)
+  }
 
   //execute the commands
   //finish

@@ -26,6 +26,12 @@ The unwrap.json file may contain urls, programs, and terminal commands as follow
       "SourceTree",
       "Safari"
     ],
+    "files":[
+      ""
+    ],
+    "directories":[
+      ""
+    ],
     "commands":[
       "gulp sass",
       "gulp watch",
