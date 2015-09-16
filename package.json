@@ -13,5 +13,11 @@
   "license": "ISC",
   "dependencies": {
     "commander": "^2.8.1"
-  }
+  },
+  "keywords":[
+    "cli",
+    "project manager",
+    "productivity",
+    "terminal"
+  ]
 }

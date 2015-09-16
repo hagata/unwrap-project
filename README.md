@@ -4,7 +4,7 @@ A command line tool for saving and opening all the directories, files, urls, pro
 
 ---
 
-## installation
+## Installation
 installation is easy with Node Package Manager (npm). If you don't already have Node, [Download & install Node.js](https://nodejs.org/en/).
 
 
@@ -51,23 +51,26 @@ The unwrap.json file may contain urls, programs, and terminal commands as follow
 - Folders: any directory listed in folders will open a Finder window at that location.
 
 
-## commands
+## Commands
 ### list
 `unwrap list` or `unwrap ls`
 
 *Options*
 
-`unwrap list --directories` or `-d`
-Will list the project names with their coresponding root directories.
+- `unwrap list --directories` or `-d`
+
+  Will list the project names with their coresponding root directories.
 
 
-###add
-`unwrap add` or `unwrap a`
+### add
+- `unwrap add` or `unwrap a`
+
 To add a project to Unwrap, use the add command in the current/ root directory of your project; followed by a name for the project. By default, The current working directory will be saved as the root of the project (where the command is executed).
 ```
 unwrap add ProjectName
 ```
-####Specifying the directory: 
+
+#### Specifying the directory: 
 If you would like to use add while not in the root directory, you can supply a directory as a second argument after the project name. 
 ```
 unwrap add ProjectName /Users/user-name/documents/project-root
@@ -75,23 +78,29 @@ unwrap add ProjectName /Users/user-name/documents/project-root
 
 ### remove
 `unwrap remove projectName` or `unwrap rm projectName`
+
 To remove a project saved in Unwrap, simply use the remove command. *This cannot *
 
 ### open
 `unwrap open projectName` or simply `unwrap projectName`
+
 This is the default action for `unwrap`, meaning you don't need to use `open` if you pass in a valid project name afterwards. 
 
 The open command will search the root directory of the project for the unwrap.json file. 
 
 *Options*
-`unwrap open -newwindow projectName` or `unwrap open -n projectName`
-The -n | -newwindow option will unwrap the project and open a new terminal window at the project root directory.
 
-`unwrap open -tab projectName` or `unwrap open -t projectName`
-The -t | -tab option will unwrap the project and open a new terminal tab in the same Terminal window at the project root directory. 
+- `unwrap open -newwindow projectName` or `unwrap open -n projectName`
+
+  The -n | -newwindow option will unwrap the project and open a new terminal window at the project root directory.
+
+- `unwrap open -tab projectName` or `unwrap open -t projectName`
+
+  The -t | -tab option will unwrap the project and open a new terminal tab in the same Terminal window at the project root directory. 
 
 ## cd
 `unwrap cd projectName`
+
 Use `unwrap cd` to open a new terminal window at the root directory of a saved project. Useful when you just need to cd to the project but don't want to open everything along with it. 
 
 
