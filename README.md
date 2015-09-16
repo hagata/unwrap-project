@@ -116,6 +116,8 @@ unwrap open -h
 ## ROAD MAP
 `unwrap add projectName -description "THis is a project about…"` Add descriptions to projects to be shown on unwrap list
 
+`unwrap remove --all` Remove all projects 
+
 colors - Add descriptive colors to the terminal output
 
 Windows compatibility - rewrite/ remove -t|--tab option for open 

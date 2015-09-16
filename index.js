@@ -17,7 +17,6 @@ unwrap //list
   .action(function(options) {
     if (options.directories){
       storage.list('dir');
-      console.log('With Option Directories');
     }else {
       storage.list();
     }
