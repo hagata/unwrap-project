@@ -1,7 +1,11 @@
 
 var fs = require('fs');
-var persistFile = fs.readFileSync('./persist.json');
+var path = require('path');
+
+var persistPath = path.join(path.dirname(fs.realpathSync(__filename)), './persist.json');
+var persistFile = fs.readFileSync(persistPath);
 var persistData = JSON.parse(persistFile);
+
 
 /**
  * List Command returns the list of projects
@@ -33,6 +37,10 @@ module.exports.readPersist = function() {
 
 module.exports.add = function(projectName, directory) {
 
+  //Check if that name is taken
+  //read persist, indexOF > -1 ? 
+  //return already exists
+  
   //Check if a directory is supplied, otherwise set the current directory 
   if (!directory){
     directory = process.cwd()
@@ -47,6 +55,10 @@ module.exports.add = function(projectName, directory) {
   persistData.projects.push(newProject)
   this.writePersist(persistData);
 
+  //Copy unwrap template
+  var copyFile = path.join(path.dirname(fs.realpathSync(__filename)), './_unwrap.json')
+  this.duplicateFile(copyFile, projectName, directory);
+
   console.log('Added - ' + projectName);
   
 }
@@ -54,10 +66,7 @@ module.exports.add = function(projectName, directory) {
 module.exports.remove = function(projectName) {
   console.log('Removing Project… \"' + projectName + '\"\n');
   //does that proj exist?
-  var findProject = function(find) {
-    return find.project;
-  }
-  var projectIndex = persistData.projects.map(findProject).indexOf(projectName);
+  var projectIndex = this.findProject(projectName);
 
   //if so, remove it
   if(projectIndex > -1){
@@ -68,7 +77,27 @@ module.exports.remove = function(projectName) {
  }
 };
 
+module.exports.findProject = function(projectName) {
+  var findProject = function(find) {
+    return find.project;
+  }
+  var projectIndex = persistData.projects.map(findProject).indexOf(projectName);
+  return projectIndex
+}
+
 module.exports.writePersist = function(updatedData) {
   var writePersist = JSON.stringify(updatedData, null, 2);
-  fs.writeFileSync('./persist.json', writePersist);
+  fs.writeFileSync(persistPath, writePersist);
 }
+
+
+module.exports.duplicateFile = function(file, projectName, dir) {
+  var readFile = file;
+  var writeFile = dir +'/unwrap.json';
+
+  // Read File
+  fs.createReadStream(readFile)
+    // Write File
+    .pipe(fs.createWriteStream(writeFile));
+}
+

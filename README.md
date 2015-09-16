@@ -94,3 +94,10 @@ to get help for each command use the command, followed by ` -h`
 unwrap open -h
 ```
 
+
+##ROAD MAP
+`unwrap add projectName -description "THis is a project about…"` Add descriptions to projects to be shown on unwrap list
+
+`unwrap cd projectName` Change working directory to the root of a project
+
+colors - Add descriptive colors to the terminal output

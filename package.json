@@ -11,7 +11,7 @@
   },
   "author": "Genki Hagata",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "commander": "^2.8.1"
   }
 }
