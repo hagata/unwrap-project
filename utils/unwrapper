@@ -25,39 +25,50 @@ module.exports.openProject = function(projectName, options) {
         if(unwrapped.files){
           unwrapped.files.forEach(function(file) {
             var openFile = 'open ' + file;
-            exec(openFile,{cwd: projectDir }, function(err, stdout, stdin){
-              if(err) console.log(err);
-            }); 
-            console.log('  Opening File -  %s', file);
+
+            if(!file == ''){
+              exec(openFile,{cwd: projectDir }, function(err, stdout, stdin){
+                if(err) console.log(err);
+              }); 
+              console.log('  Opening File -  %s', file);
+            }
 
           })
         }
-        if(unwrapped.folders) {
+        if(unwrapped.folders.length > 0) {
           unwrapped.folders.forEach(function(folder) {
             var openFolder = 'open ' + folder;
-            exec(openFolder, {cwd: projectDir} );
-            console.log('  Opening Finder at -  %s', folder);
+            if(!folder == ''){
+              exec(openFolder, {cwd: projectDir} );
+              console.log('  Opening Finder at -  %s', folder);
+            }
           })
         }
         if(unwrapped.urls){
-          unwrapped.urls.forEach(function(element, index, array){
-            var execfunc = 'open ' + element
-            exec(execfunc);
-            console.log('  Opening URL -  %s', element);
+          unwrapped.urls.forEach(function(url, index, array){
+            var execfunc = 'open ' + url
+            if(!url == ''){
+              exec(execfunc);
+              console.log('  Opening URL -  %s', url);
+            }
           });
         }
-        if(unwrapped.apps){
+        if(unwrapped.apps && unwrapped.apps.length >= 0){
           unwrapped.apps.forEach(function(app) {
             var execfunc = 'open -a ' + app;
-            exec(execfunc);
-            console.log('  Launching -  %s', app);
+            if(!app == ''){
+              exec(execfunc);
+              console.log('  Launching -  %s', app);
+            }
           })
         }
         if(unwrapped.commands){
           //Want a new window to open and have things exec there?
           unwrapped.commands.forEach(function(command) {
-            exec(command,{cwd: projectDir })
-            console.log(command);
+            if (!command == ''){
+              exec(command,{cwd: projectDir })
+              console.log(command);
+            }
           })
         }
 

@@ -19,6 +19,10 @@
     {
       "project": "unwrapCLI",
       "directory": "/Users/genki-book/Documents/_Devbox/unwrap-project"
+    },
+    {
+      "project": "desktop",
+      "directory": "/Users/genki-book/Desktop"
     }
   ]
 }
