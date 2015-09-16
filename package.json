@@ -1,6 +1,6 @@
 {
   "name": "unwrap-project",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "A command line utility for saving, and opening projects of any kind.",
   "preferGlobal": true,
   "bin": {
@@ -14,7 +14,7 @@
   "dependencies": {
     "commander": "^2.8.1"
   },
-  "keywords":[
+  "keywords": [
     "cli",
     "project manager",
     "productivity",
