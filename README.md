@@ -86,6 +86,11 @@ The -n | -newwindow option will unwrap the project and open a new terminal windo
 `unwrap open -tab projectName` or `unwrap open -t projectName`
 The -t | -tab option will unwrap the project and open a new terminal tab in the same Terminal window at the project root directory. 
 
+##cd
+`unwrap cd projectName`
+Use `unwrap cd` to open a new terminal window at the root directory of a saved project. Useful when you just need to cd to the project but don't want to open everything along with it. 
+
+
 ###help
 `unwrap --help` or `unwrap -h`
 
@@ -101,3 +106,5 @@ unwrap open -h
 `unwrap cd projectName` Change working directory to the root of a project
 
 colors - Add descriptive colors to the terminal output
+
+Windows compatibility - rewrite/ remove -t|--tab option for open 

@@ -23,7 +23,6 @@ unwrap //list
     }
   })
 
-
 unwrap //add
   .command('add <name> [directory]')
   .alias('a')
@@ -48,5 +47,12 @@ unwrap //open //default command
   .description('Open a saved project by name')
   .action(function(name, options) {
     unwrapper.openProject(name, options);
+  })
+
+unwrap //change directory
+  .command('cd <project>')
+  .description('changes the current working directory to the root of a saved project.')
+  .action(function(project) {
+    storage.changeDirectory(project)
   })
 unwrap.parse(process.argv);

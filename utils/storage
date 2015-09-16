@@ -1,6 +1,7 @@
 
 var fs = require('fs');
 var path = require('path');
+var exec = require('child_process').exec;
 
 var persistPath = path.join(path.dirname(fs.realpathSync(__filename)), './persist.json');
 var persistFile = fs.readFileSync(persistPath);
@@ -79,6 +80,24 @@ module.exports.remove = function(projectName) {
    console.log(' - \"' + projectName + '\"" does not exist.');
  }
 };
+
+module.exports.changeDirectory = function(projectName) {
+  //check index of project
+  //if it doesn't exist, return message
+  console.log('changeing directory to root of \"%s\" ', projectName);
+    if(this.findProject(projectName) <= -1){
+    console.log('Oops…\n  \"%s\" does not exist. \n   Try adding the project or check \"unwrap ls\" for available projects', projectName);
+    return
+  }
+  var projectIndex = this.findProject(projectName);
+  var projectDirectory = persistData.projects[projectIndex].directory;
+  //Change directory of current terminal window
+  //
+  var execFunc = 'open -a Terminal ' + projectDirectory;
+  exec(execFunc)
+  
+//TODO: Add options to open in new window or tab.
+}
 
 module.exports.findProject = function(projectName) {
   var findProject = function(find) {
