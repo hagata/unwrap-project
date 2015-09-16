@@ -38,8 +38,11 @@ module.exports.readPersist = function() {
 module.exports.add = function(projectName, directory) {
 
   //Check if that name is taken
-  //read persist, indexOF > -1 ? 
-  //return already exists
+  //if so, return.
+  if(this.findProject(projectName) > -1){
+    console.log('Oops…\n  \"%s\" already exists', projectName);
+    return
+  }
   
   //Check if a directory is supplied, otherwise set the current directory 
   if (!directory){
@@ -53,7 +56,7 @@ module.exports.add = function(projectName, directory) {
 
   //TODO: Prompt for confirmation?
   persistData.projects.push(newProject)
-  this.writePersist(persistData);
+  // this.writePersist(persistData);
 
   //Copy unwrap template
   var copyFile = path.join(path.dirname(fs.realpathSync(__filename)), './_unwrap.json')
