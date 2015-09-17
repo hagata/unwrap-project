@@ -9,10 +9,19 @@ installation is easy with Node Package Manager (npm). If you don't already have 
 
 
 once npm is installed, run
-`npm install unwrap-project`
+`npm install -g unwrap-project`
 
 ---
+# Getting Started
+- Install it
+- check that unwrap works with `unwrap list`
+- add your first project
+- cd to the project foler, or drag and drop the folder onto the Terminal icon
+- `unwrap add [projectName]` where project name is any name you want (no spaces though)
+- `unwrap open [projectName]` By default, opening your project will open the project root directory in finder
+- edit the unwrap.
 
+---
 ## Creating the unwrap.json file
 Each project in Unwrap will need to have an unwrap.json file containing the information of what should be opened when executing `unwrap open projectName`
 
