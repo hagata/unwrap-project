@@ -21,9 +21,9 @@ module.exports.list = function(option) {
     var projectDirectory = persistData.projects[index].directory;
 
     if (option == 'dir'){
-      console.log(' - ' + projecetName + ' | ' + projectDirectory);
+      console.log(' - ' + projecetName.bold.green + ' | ' + projectDirectory);
     }else{
-      console.log(" - " + projecetName)
+      console.log(" - " + projecetName.bold.green)
     }
   }
 }
@@ -72,12 +72,12 @@ module.exports.add = function(projectName, directory) {
     console.log('unwrap.json file added to the project root'.green);
   }
 
-  console.log('Added - %s'.green, projectName);
+  console.log('Added - %s'.bold.green, projectName);
   
 }
 
 module.exports.remove = function(projectName) {
-  console.log('Removing Project… \"' + projectName + '\"\n');
+  console.log('Removing Project… \"%s\"\n'.italic.red, projectName);
   //does that proj exist?
   var projectIndex = this.findProject(projectName);
 
@@ -86,7 +86,7 @@ module.exports.remove = function(projectName) {
     persistData.projects.splice(projectIndex, 1)
     this.writePersist(persistData);
   }else{
-   console.log(' - \"' + projectName + '\"" does not exist.');
+   console.log(' - \"%s\" does not exist.'.red, projectName);
  }
 };
 
