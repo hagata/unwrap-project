@@ -2,6 +2,7 @@
 var fs = require('fs');
 var path = require('path');
 var exec = require('child_process').exec;
+var colors = require('colors');
 
 var persistPath = path.join(path.dirname(fs.realpathSync(__filename)), './persist.json');
 var persistFile = fs.readFileSync(persistPath);
@@ -14,7 +15,7 @@ var persistData = JSON.parse(persistFile);
  */
 module.exports.list = function(option) {
 
-  console.log('Projects: ');
+  console.log('Projects: '.green);
   for (index in persistData.projects){
     var projecetName = persistData.projects[index].project;
     var projectDirectory = persistData.projects[index].directory;
@@ -59,11 +60,19 @@ module.exports.add = function(projectName, directory) {
   persistData.projects.push(newProject)
   this.writePersist(persistData);
 
-  //Copy unwrap template
-  var copyFile = path.join(path.dirname(fs.realpathSync(__filename)), './_unwrap.json')
-  this.duplicateFile(copyFile, projectName, directory);
+  //Copy unwrap template if there isn't one already
+  var unwrapFile = directory+'/unwrap.json';
+  // console.log('statSync is %s', unwrapFile);
+  if (this.fileExistsCheck(unwrapFile)){
+    console.log('unwrap.json file already exists'.green);
+  }else{
+    var copyFile = path.join(path.dirname(fs.realpathSync(__filename)), './_unwrap.json')
+    this.duplicateFile(copyFile, projectName, directory);
+    console.log('No \'unwrap.json\' file found'.red);
+    console.log('unwrap.json file added to the project root'.green);
+  }
 
-  console.log('Added - ' + projectName);
+  console.log('Added - %s'.green, projectName);
   
 }
 
@@ -85,7 +94,7 @@ module.exports.changeDirectory = function(projectName) {
   //check index of project
   //if it doesn't exist, return message
   console.log('changeing directory to root of \"%s\" ', projectName);
-    if(this.findProject(projectName) <= -1){
+  if(this.findProject(projectName) <= -1){
     console.log('Oops…\n  \"%s\" does not exist. \n   Try adding the project or check \"unwrap ls\" for available projects', projectName);
     return
   }
@@ -121,5 +130,15 @@ module.exports.duplicateFile = function(file, projectName, dir) {
   fs.createReadStream(readFile)
     // Write File
     .pipe(fs.createWriteStream(writeFile));
-}
+  }
+
+
+module.exports.fileExistsCheck = function(filePath){
+  try{
+    fs.statSync(filePath);
+  }catch(err){
+    if(err.code == 'ENOENT') return false;
+  }
+  return true;
+};
 
