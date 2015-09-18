@@ -33,9 +33,10 @@ unwrap //add
 unwrap //remove
   .command('remove <project>')
   .alias('rm')
+  .option('-c, --clean', 'removes the project, and the unwrap.json file from the project root')
   .description('Removes a project from the unwrap list')
-  .action(function(project) {
-    storage.remove(project)
+  .action(function(project, options) {
+    storage.remove(project, options)
   })
 
 unwrap //open //default command

@@ -88,7 +88,12 @@ unwrap add ProjectName /Users/user-name/documents/project-root
 ### remove
 `unwrap remove projectName` or `unwrap rm projectName`
 
-To remove a project saved in Unwrap, simply use the remove command. *This cannot *
+To remove a project saved in Unwrap, simply use the remove command. By Default, removing a project does not remove the unwrap.json file from the project root.
+
+*Options*
+
+- `unwrap remove --clean projectName` or `unwram rm -c projectName`
+    Using the `--clean` or `-c` option on remove will remove the unwrap.json file if one exists in the project root directory
 
 ### open
 `unwrap open projectName` or simply `unwrap projectName`
