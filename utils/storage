@@ -76,12 +76,21 @@ module.exports.add = function(projectName, directory) {
   
 }
 
-module.exports.remove = function(projectName) {
+module.exports.remove = function(projectName, options) {
   console.log('Removing Project… \"%s\"\n'.italic.red, projectName);
   //does that proj exist?
   var projectIndex = this.findProject(projectName);
 
-  //if so, remove it
+  if(options.clean){
+    var projectDir = persistData.projects[projectIndex].directory;
+    var unwrapFile = projectDir +'/unwrap.json';
+
+    if(this.fileExistsCheck(unwrapFile)){
+        fs.unlink(unwrapFile);
+        console.log('\"unwrap.json\" was removed from %s'.green, projectDir);
+    }
+  }
+
   if(projectIndex > -1){
     persistData.projects.splice(projectIndex, 1)
     this.writePersist(persistData);
