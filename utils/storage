@@ -21,7 +21,7 @@ module.exports.list = function(option) {
     var projectDirectory = persistData.projects[index].directory;
 
     if (option == 'dir'){
-      console.log(' - ' + projecetName.bold.green + ' | ' + projectDirectory);
+      console.log(' - ' + projecetName.bold.green + ' | ' + projectDirectory.green);
     }else{
       console.log(" - " + projecetName.bold.green)
     }
@@ -42,7 +42,7 @@ module.exports.add = function(projectName, directory) {
   //Check if that name is taken
   //if so, return.
   if(this.findProject(projectName) > -1){
-    console.log('Oops…\n  \"%s\" already exists', projectName);
+    console.log('Oops…\n  \"%s\" already exists'.red, projectName);
     return
   }
   

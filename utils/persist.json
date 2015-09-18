@@ -1,28 +1,4 @@
 {
   "projects": [
-    {
-      "project": "project1",
-      "directory": "/Users/genki-book/Documents/_Devbox/unwrap-project-2"
-    },
-    {
-      "project": "project2",
-      "directory": "/Users/genki-book/Documents/_Devbox/unwrap-project-2"
-    },
-    {
-      "project": "twg",
-      "directory": "/Users/genki-book/Documents/_Projects/_Huge/_Twg"
-    },
-    {
-      "project": "almanac",
-      "directory": "/Users/genki-book/Documents/_Projects/_Huge/gthink-developers"
-    },
-    {
-      "project": "unwrapCLI",
-      "directory": "/Users/genki-book/Documents/_Devbox/unwrap-project"
-    },
-    {
-      "project": "tester",
-      "directory": "/Users/genki-book/Desktop"
-    }
   ]
 }

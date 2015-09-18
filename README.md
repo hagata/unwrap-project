@@ -8,7 +8,7 @@ A command line tool for saving and opening all the directories, files, urls, pro
 installation is easy with Node Package Manager (npm). If you don't already have Node, [Download & install Node.js](https://nodejs.org/en/).
 
 
-once npm is installed, run
+once Node is installed, run
 `npm install -g unwrap-project`
 
 ---
@@ -19,7 +19,7 @@ once npm is installed, run
 - cd to the project foler, or drag and drop the folder onto the Terminal icon
 - `unwrap add [projectName]` where project name is any name you want (no spaces though)
 - `unwrap open [projectName]` By default, opening your project will open the project root directory in finder
-- edit the unwrap.
+- edit the unwrap.json file
 
 ---
 ## Creating the unwrap.json file
