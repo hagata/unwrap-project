@@ -1,4 +1,12 @@
 {
   "projects": [
+    {
+      "project": "test2",
+      "directory": "/Users/genki-book/Documents/_Devbox/unwrap-project"
+    },
+    {
+      "project": "test",
+      "directory": "/Users/genki-book/Desktop"
+    }
   ]
 }

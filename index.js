@@ -3,13 +3,27 @@
 var unwrap = require('commander');
 var fs = require('fs');
 var exec = require('child_process').exec;
+var path = require('path');
+var utils = require('./utils/utils');
+
+
+// Check for persist
+var pPath = path.join(path.dirname(fs.realpathSync(__filename)), './utils/persist.json')
+var pExists = utils.fileExistsCheck(pPath);
+if (!pExists){
+  utils.createPersistFile();
+  console.log('Persist was missing. Creating persist.storage at %s'.red, pPath);
+  return;
+}
+
+
 var storage = require('./utils/storage');
 var unwrapper = require('./utils/unwrapper');
 
 unwrap
   .version('0.5.0');
 
-storage.initStorage();
+
 unwrap //list
   .command('list')
   .alias('ls')

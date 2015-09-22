@@ -1,0 +1,28 @@
+var fs = require('fs');
+var path = require('path');
+
+module.exports.fileExistsCheck = function(filePath){
+  try{
+    fs.statSync(filePath);
+  }catch(err){
+    if(err.code == 'ENOENT') return false;
+  }
+  return true;
+};
+
+module.exports.createPersistFile = function () {
+  var pathToTemplate = path.join(path.dirname(fs.realpathSync(__filename)), './_persist.json')
+  this.duplicateFile(pathToTemplate, 'utils/', 'persist.json')
+  // console.log('templ path', pathToTemplate);
+}
+
+
+module.exports.duplicateFile = function(file, dir, outputName) {
+  var readFile = file;
+  var writeFile = dir + outputName;
+  console.log('writing file'.green, writeFile);
+  // Read File
+  fs.createReadStream(readFile)
+    // Write File
+    .pipe(fs.createWriteStream(writeFile));
+  }
