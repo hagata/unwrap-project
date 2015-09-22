@@ -9,6 +9,7 @@ var unwrapper = require('./utils/unwrapper');
 unwrap
   .version('0.5.0');
 
+storage.initStorage();
 unwrap //list
   .command('list')
   .alias('ls')
