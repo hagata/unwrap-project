@@ -1,24 +1,32 @@
 #! /usr/bin/env node
 
+var utils = require('./utils/utils');
 var unwrap = require('commander');
 var fs = require('fs');
 var exec = require('child_process').exec;
 var path = require('path');
-var utils = require('./utils/utils');
+var colors = require('colors');
+var sync = require('fs-sync');
 
 
 // Check for persist
+console.log('Checking for persist storage'.white);
 var pPath = path.join(path.dirname(fs.realpathSync(__filename)), './utils/persist.json')
-var pExists = utils.fileExistsCheck(pPath);
-if (!pExists){
+var parentPath = path.join(path.dirname(fs.realpathSync(__filename)), '../unwrap-storage/persist.json')
+console.log('Parent Path'.magenta, parentPath);
+// console.log('Checking Inside %s'.white, pPath);
+
+if( sync.exists(parentPath) ){
+  console.log('sync reports true');
+  var storage = require('./utils/storage');
+  var unwrapper = require('./utils/unwrapper');
+  
+}else{
+
+  console.log('Does not exists__Create'.white);
   utils.createPersistFile();
-  console.log('Persist was missing. Creating persist.storage at %s'.red, pPath);
-  return;
+  console.log('Persist Storage was missing.'.red + '\nCreating persist.storage at %s'.green, parentPath );
 }
-
-
-var storage = require('./utils/storage');
-var unwrapper = require('./utils/unwrapper');
 
 unwrap
   .version('0.5.0');
@@ -70,4 +78,6 @@ unwrap //change directory
   .action(function(project) {
     storage.changeDirectory(project)
   })
+
+
 unwrap.parse(process.argv);
