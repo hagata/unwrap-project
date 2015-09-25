@@ -18,11 +18,7 @@ module.exports.createPersistFile = function () {
   var parentPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../unwrap-storage/')
 
 
-  // console.log('called create Persist');
-  // console.log('Copying from -- %s', pathToTemplate);
-  // console.log('new dest = %s', pathToUtils);
   if (!fsSync.exists(parentPath)){
-    console.log('PARENT DIR DID NOT EXISTS');
     fs.mkdirSync(parentPath)
   }
   this.duplicateFile(pathToTemplate, parentPath, 'persist.json')

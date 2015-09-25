@@ -10,26 +10,24 @@ var sync = require('fs-sync');
 
 
 // Check for persist
-console.log('Checking for persist storage'.white);
+console.log('Checking for persist storage');
 var pPath = path.join(path.dirname(fs.realpathSync(__filename)), './utils/persist.json')
 var parentPath = path.join(path.dirname(fs.realpathSync(__filename)), '../unwrap-storage/persist.json')
-console.log('Parent Path'.magenta, parentPath);
-// console.log('Checking Inside %s'.white, pPath);
 
 if( sync.exists(parentPath) ){
   console.log('sync reports true');
   var storage = require('./utils/storage');
   var unwrapper = require('./utils/unwrapper');
-  
 }else{
 
-  console.log('Does not exists__Create'.white);
-  utils.createPersistFile();
   console.log('Persist Storage was missing.'.red + '\nCreating persist.storage at %s'.green, parentPath );
+  utils.createPersistFile();
 }
 
+
+
 unwrap
-  .version('0.5.0');
+  .version('0.12.1');
 
 
 unwrap //list

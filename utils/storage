@@ -7,13 +7,6 @@ var utils = require('./utils');
 var fsSync = require('fs-sync');
 
 
-// var pPath = path.join(path.dirname(fs.realpathSync(__filename)), './persist.json')
-// var pExists = utils.fileExistsCheck(pPath);
-//   console.log('p EXISTS == %s from %s'.green, pExists, pPath);
-// if (pExists){
-//   // utils.createPersistFile();
-//   // console.log('Persist Storage was missing.'.red + '\nCreating persist.storage at %s'.green, pPath);
-// }
   var persistPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../unwrap-storage/persist.json');
   var persistFile = fsSync.read(persistPath);
   var persistData = JSON.parse(persistFile);

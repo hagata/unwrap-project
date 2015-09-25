@@ -132,6 +132,8 @@ unwrap open -h
 
 `unwrap remove --all` Remove all projects 
 
-colors - Add descriptive colors to the terminal output
-
 Windows compatibility - rewrite/ remove -t|--tab option for open 
+
+# Uninstalling
+Uninstalling unwrap-project using npm uninstall -g , `npm uninstall -g unwrap-project`
+To remove the project *persist storage* remove the unwrap-storage directory insite node_modules at `/usr/local/lib/node_modules/ `
