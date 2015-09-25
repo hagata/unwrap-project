@@ -13,7 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "colors": "^1.1.2",
-    "commander": "^2.8.1"
+    "commander": "^2.8.1",
+    "fs-sync": "^0.2.6"
   },
   "repository": {
     "type": "git",

@@ -1,4 +1,5 @@
 var fs = require('fs');
+var fsSync = require('fs-sync');
 var path = require('path');
 
 module.exports.fileExistsCheck = function(filePath){
@@ -7,13 +8,25 @@ module.exports.fileExistsCheck = function(filePath){
   }catch(err){
     if(err.code == 'ENOENT') return false;
   }
+  console.log('CHECKING___EXISTS ==');
   return true;
 };
 
 module.exports.createPersistFile = function () {
   var pathToTemplate = path.join(path.dirname(fs.realpathSync(__filename)), './_persist.json')
-  this.duplicateFile(pathToTemplate, 'utils/', 'persist.json')
-  // console.log('templ path', pathToTemplate);
+  var pathToUtils = path.join(path.dirname(fs.realpathSync(__filename)))  + '/';
+  var parentPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../unwrap-storage/')
+
+
+  // console.log('called create Persist');
+  // console.log('Copying from -- %s', pathToTemplate);
+  // console.log('new dest = %s', pathToUtils);
+  if (!fsSync.exists(parentPath)){
+    console.log('PARENT DIR DID NOT EXISTS');
+    fs.mkdirSync(parentPath)
+  }
+  this.duplicateFile(pathToTemplate, parentPath, 'persist.json')
+  console.log('Finished creating Persit Storage at %s', parentPath);
 }
 
 
@@ -24,5 +37,9 @@ module.exports.duplicateFile = function(file, dir, outputName) {
   // Read File
   fs.createReadStream(readFile)
     // Write File
-    .pipe(fs.createWriteStream(writeFile));
+    .pipe(fs.createWriteStream(writeFile))
+    .on('open', function(fd) {
+      
+      console.log('write stream complete');
+    });
   }
