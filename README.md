@@ -132,6 +132,8 @@ unwrap open -h
 
 `unwrap remove --all` Remove all projects 
 
+`unwrap update [projectName]` To be able to change the stored root directory of a project. Also to add hadling for projects that moved, but are still in persist storage, e.g, "projectName exists, but is not found at [root/directory/"
+
 Windows compatibility - rewrite/ remove -t|--tab option for open 
 
 # Uninstalling
