@@ -10,12 +10,10 @@ var sync = require('fs-sync');
 
 
 // Check for persist
-console.log('Checking for persist storage');
 var pPath = path.join(path.dirname(fs.realpathSync(__filename)), './utils/persist.json')
 var parentPath = path.join(path.dirname(fs.realpathSync(__filename)), '../unwrap-storage/persist.json')
 
 if( sync.exists(parentPath) ){
-  console.log('sync reports true');
   var storage = require('./utils/storage');
   var unwrapper = require('./utils/unwrapper');
 }else{
