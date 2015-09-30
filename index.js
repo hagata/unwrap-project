@@ -52,6 +52,14 @@ unwrap //add
     storage.add(name, directory, options)
   })
 
+  unwrap // describe -- add a project description 
+  .command('describe <project> <descriptor>')
+  .alias('d')
+  .description('Allows you to add a project description to an already existing project')
+  .action( function(project, descriptor) {
+    storage.projectDescription(project, descriptor)
+  })
+
 unwrap //remove
   .command('remove <project>')
   .alias('rm')

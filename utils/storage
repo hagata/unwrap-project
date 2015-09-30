@@ -102,6 +102,22 @@ module.exports.add = function(projectName, directory, options) {
   
 }
 
+module.exports.projectDescription = function(projectName, descriptor) {
+  var projectDescriptor = descriptor;
+  //does projectname exist?
+  //if not break
+  //
+  //if yes
+  //
+  //grab persist
+  //grab project index
+  //set the key value for "descriptor": descriptor
+  //push
+  //write
+  //console log the confirmed project + projectDescriptor
+  console.log(' - ' + projectName.bold.green + ' \“%s\”'.green, projectDescriptor);
+}
+
 module.exports.remove = function(projectName, options) {
   console.log('Removing Project… \"%s\"\n'.italic.red, projectName);
   //does that proj exist?
