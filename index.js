@@ -35,9 +35,9 @@ unwrap //list
   .option('-d, --directories', 'show the root directories of each project in the list')
   .option('-i, --info', 'show the project description if one is listed')
   .action(function(options) {
-    if (options){ storage.list(options);}
-    // if (options.info){ storage.list('info'); }
-    else {
+    if (options){ 
+      storage.list(options);
+    } else {
       storage.list();
     }
   })
@@ -45,9 +45,11 @@ unwrap //list
 unwrap //add
   .command('add <name> [directory]')
   .alias('a')
+  .option('-i, --info [info]', 'Add a description for the project, what project is it?')
   .description('Adds a project to unwrap')
-  .action(function(name, directory) {
-    storage.add(name, directory)
+  .action(function(name, directory, options) {
+    console.log('This desc. %s', options);
+    storage.add(name, directory, options)
   })
 
 unwrap //remove
