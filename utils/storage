@@ -18,15 +18,19 @@ var fsSync = require('fs-sync');
  */
 module.exports.list = function(option) {
 
-  console.log('Projects: '.green);
+
   for (index in persistData.projects){
-    var projecetName = persistData.projects[index].project;
+    var projectName = persistData.projects[index].project;
     var projectDirectory = persistData.projects[index].directory;
 
-    if (option == 'dir'){
-      console.log(' - ' + projecetName.bold.green + ' | ' + projectDirectory.green);
-    }else{
-      console.log(" - " + projecetName.bold.green)
+    if (option.directories){
+      console.log(' - ' + projectName.bold.green + ' | ' + projectDirectory.green);
+    }
+    if (option.info){
+     console.log(' - ' + projectName.bold.green + ' | ' + "project info goes here")
+    }
+    else{
+      console.log(" - " + projectName.bold.green)
     }
   }
 }

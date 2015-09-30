@@ -33,10 +33,11 @@ unwrap //list
   .alias('ls')
   .description('List all projects that are saved in Unwrap-Projects')
   .option('-d, --directories', 'show the root directories of each project in the list')
+  .option('-i, --info', 'show the project description if one is listed')
   .action(function(options) {
-    if (options.directories){
-      storage.list('dir');
-    }else {
+    if (options){ storage.list(options);}
+    // if (options.info){ storage.list('info'); }
+    else {
       storage.list();
     }
   })
