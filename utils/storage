@@ -7,9 +7,9 @@ var utils = require('./utils');
 var fsSync = require('fs-sync');
 
 
-  var persistPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../unwrap-storage/persist.json');
-  var persistFile = fsSync.read(persistPath);
-  var persistData = JSON.parse(persistFile);
+var persistPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../unwrap-storage/persist.json');
+var persistFile = fsSync.read(persistPath);
+var persistData = JSON.parse(persistFile);
 
 
 /**
@@ -18,17 +18,28 @@ var fsSync = require('fs-sync');
  */
 module.exports.list = function(option) {
 
-  console.log('Projects: '.green);
-  for (index in persistData.projects){
-    var projecetName = persistData.projects[index].project;
-    var projectDirectory = persistData.projects[index].directory;
 
-    if (option == 'dir'){
-      console.log(' - ' + projecetName.bold.green + ' | ' + projectDirectory.green);
-    }else{
-      console.log(" - " + projecetName.bold.green)
+  for (index in persistData.projects){
+    var projectName = persistData.projects[index].project;
+    var projectDirectory = persistData.projects[index].directory;
+    var projectDescriptor = persistData.projects[index].descriptor;
+
+    if (option.directories){
+      console.log('   - '.green + projectName.bold.green + ' | ' + projectDirectory.green );
+    }
+
+    else if (option.info){
+      if(!projectDescriptor){
+        projectDescriptor = ""
+      }
+      console.log('   - '.green + projectName.bold.green + ': \“%s\”'.green, projectDescriptor )
+    }
+
+    else {
+      console.log("   - ".green + projectName.bold.green)
     }
   }
+
 }
 
 
@@ -40,7 +51,8 @@ module.exports.readPersist = function() {
   return persistData;
 }
 
-module.exports.add = function(projectName, directory) {
+module.exports.add = function(projectName, directory, options) {
+
 
   //Check if that name is taken
   //if so, return.
@@ -48,6 +60,8 @@ module.exports.add = function(projectName, directory) {
     console.log('Oops…\n  \"%s\" already exists'.red, projectName);
     return
   }
+
+
   
   //Check if a directory is supplied, otherwise set the current directory 
   if (!directory){
@@ -58,6 +72,18 @@ module.exports.add = function(projectName, directory) {
     "project": projectName,
     "directory": directory
   }
+
+  if(options.info) {
+    if(this.findProject(projectName) > -1){
+      console.log('OK \"%s\" already exists'.green, projectName);
+    }
+    newProject = {
+      "project": projectName,
+      "directory": directory,
+      "descriptor": options.info
+    }
+  }
+  
 
   //TODO: Prompt for confirmation?
   persistData.projects.push(newProject)
@@ -77,6 +103,21 @@ module.exports.add = function(projectName, directory) {
 
   console.log('Added - %s'.bold.green, projectName);
   
+}
+
+module.exports.projectDescription = function(projectName, descriptor) {
+  var projectDescriptor = descriptor;
+  var projectIndex = this.findProject(projectName) 
+
+  if(projectIndex > -1){
+    persistData.projects[projectIndex].descriptor = projectDescriptor;
+    this.writePersist(persistData);
+
+    console.log('   - '.green + projectName.bold.green + ' \“%s\”'.green, projectDescriptor);
+
+  }else{
+    console.log('\“%s\” does not exists. Check the spelling or add it with… \n - unwrap add %s \n'.red, projectName, projectName);
+  }
 }
 
 module.exports.remove = function(projectName, options) {

@@ -33,10 +33,11 @@ unwrap //list
   .alias('ls')
   .description('List all projects that are saved in Unwrap-Projects')
   .option('-d, --directories', 'show the root directories of each project in the list')
+  .option('-i, --info', 'show the project description if one is listed')
   .action(function(options) {
-    if (options.directories){
-      storage.list('dir');
-    }else {
+    if (options){ 
+      storage.list(options);
+    } else {
       storage.list();
     }
   })
@@ -44,9 +45,19 @@ unwrap //list
 unwrap //add
   .command('add <name> [directory]')
   .alias('a')
+  .option('-i, --info [info]', 'Add a description for the project, what project is it?')
   .description('Adds a project to unwrap')
-  .action(function(name, directory) {
-    storage.add(name, directory)
+  .action(function(name, directory, options) {
+    console.log('This desc. %s', options);
+    storage.add(name, directory, options)
+  })
+
+  unwrap // describe -- add a project description 
+  .command('info <project> <description>')
+  .alias('i')
+  .description('Allows you to add a project description to an already existing project.')
+  .action( function(project, description) {
+    storage.projectDescription(project, description)
   })
 
 unwrap //remove
