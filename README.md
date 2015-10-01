@@ -68,7 +68,7 @@ The unwrap.json file may contain urls, programs, and terminal commands as follow
 
 - `unwrap list --directories` or `-d`
 
-  Will list the project names with their coresponding root directories.
+  Will list the project names with their corresponding root directories.
 
 
 ### add
@@ -79,11 +79,25 @@ To add a project to Unwrap, use the add command in the current/ root directory o
 unwrap add ProjectName
 ```
 
-#### Specifying the directory: 
+#####  Specifying the directory 
 If you would like to use add while not in the root directory, you can supply a directory as a second argument after the project name. 
 ```
 unwrap add ProjectName /Users/user-name/documents/project-root
 ```
+
+##### Adding a project description `-i`
+
+`unwrap add ProjectName -info "Add a description"` or `-i` for short.  
+You can add a project description by using the `-i` or `--info` flag followed by any descriptive text in quotes. The description can later be viewed with `unwrap list -i` or `unwrap list --info`
+
+
+### info
+```
+unwrap info existingProjectName "Description goes here"
+```
+
+The `info` command allows you to add a description to an existing project. The description can later be viewed with `unwrap list -i` or `unwrap list --info`.
+
 
 ### remove
 `unwrap remove projectName` or `unwrap rm projectName`
@@ -92,7 +106,7 @@ To remove a project saved in Unwrap, simply use the remove command. By Default, 
 
 *Options*
 
-- `unwrap remove --clean projectName` or `unwram rm -c projectName`
+- `unwrap remove --clean projectName` or `unwrap rm -c projectName`
     Using the `--clean` or `-c` option on remove will remove the unwrap.json file if one exists in the project root directory
 
 ### open
@@ -132,7 +146,7 @@ unwrap open -h
 
 `unwrap remove --all` Remove all projects 
 
-`unwrap update [projectName]` To be able to change the stored root directory of a project. Also to add hadling for projects that moved, but are still in persist storage, e.g, "projectName exists, but is not found at [root/directory/"
+`unwrap update [projectName]` To be able to change the stored root directory of a project. Also to add handling for projects that moved, but are still in persist storage, e.g, "projectName exists, but is not found at [root/directory/"
 
 Windows compatibility - rewrite/ remove -t|--tab option for open 
 

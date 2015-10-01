@@ -53,11 +53,11 @@ unwrap //add
   })
 
   unwrap // describe -- add a project description 
-  .command('describe <project> <descriptor>')
-  .alias('d')
-  .description('Allows you to add a project description to an already existing project')
-  .action( function(project, descriptor) {
-    storage.projectDescription(project, descriptor)
+  .command('info <project> <description>')
+  .alias('i')
+  .description('Allows you to add a project description to an already existing project.')
+  .action( function(project, description) {
+    storage.projectDescription(project, description)
   })
 
 unwrap //remove

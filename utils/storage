@@ -7,9 +7,9 @@ var utils = require('./utils');
 var fsSync = require('fs-sync');
 
 
-  var persistPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../unwrap-storage/persist.json');
-  var persistFile = fsSync.read(persistPath);
-  var persistData = JSON.parse(persistFile);
+var persistPath = path.join(path.dirname(fs.realpathSync(__filename)), '../../unwrap-storage/persist.json');
+var persistFile = fsSync.read(persistPath);
+var persistData = JSON.parse(persistFile);
 
 
 /**
@@ -25,18 +25,21 @@ module.exports.list = function(option) {
     var projectDescriptor = persistData.projects[index].descriptor;
 
     if (option.directories){
-      console.log(' - ' + projectName.bold.green + ' | ' + projectDirectory.green);
+      console.log('   - '.green + projectName.bold.green + ' | ' + projectDirectory.green );
     }
-    if (option.info){
+
+    else if (option.info){
       if(!projectDescriptor){
-        projectDescriptor = "No Projcet description"
+        projectDescriptor = ""
       }
-     console.log(' - ' + projectName.bold.green + ': \“%s\”'.green, projectDescriptor )
+      console.log('   - '.green + projectName.bold.green + ': \“%s\”'.green, projectDescriptor )
     }
-    else{
-      console.log(" - " + projectName.bold.green)
+
+    else {
+      console.log("   - ".green + projectName.bold.green)
     }
   }
+
 }
 
 
@@ -104,18 +107,17 @@ module.exports.add = function(projectName, directory, options) {
 
 module.exports.projectDescription = function(projectName, descriptor) {
   var projectDescriptor = descriptor;
-  //does projectname exist?
-  //if not break
-  //
-  //if yes
-  //
-  //grab persist
-  //grab project index
-  //set the key value for "descriptor": descriptor
-  //push
-  //write
-  //console log the confirmed project + projectDescriptor
-  console.log(' - ' + projectName.bold.green + ' \“%s\”'.green, projectDescriptor);
+  var projectIndex = this.findProject(projectName) 
+
+  if(projectIndex > -1){
+    persistData.projects[projectIndex].descriptor = projectDescriptor;
+    this.writePersist(persistData);
+
+    console.log('   - '.green + projectName.bold.green + ' \“%s\”'.green, projectDescriptor);
+
+  }else{
+    console.log('\“%s\” does not exists. Check the spelling or add it with… \n - unwrap add %s \n'.red, projectName, projectName);
+  }
 }
 
 module.exports.remove = function(projectName, options) {
