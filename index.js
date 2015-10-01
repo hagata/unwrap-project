@@ -48,7 +48,6 @@ unwrap //add
   .option('-i, --info [info]', 'Add a description for the project, what project is it?')
   .description('Adds a project to unwrap')
   .action(function(name, directory, options) {
-    console.log('This desc. %s', options);
     storage.add(name, directory, options)
   })
 
