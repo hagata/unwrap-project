@@ -1,6 +1,6 @@
 {
   "name": "unwrap-project",
-  "version": "0.13.3",
+  "version": "0.13.4",
   "description": "A command line utility for saving, and opening projects of any kind.",
   "preferGlobal": true,
   "bin": {
