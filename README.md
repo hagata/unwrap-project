@@ -142,7 +142,7 @@ unwrap open -h
 
 
 ## ROAD MAP
-`unwrap add projectName -description "THis is a project about…"` Add descriptions to projects to be shown on unwrap list
+Tab completion of project names
 
 `unwrap remove --all` Remove all projects 
 
