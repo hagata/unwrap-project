@@ -146,9 +146,9 @@ module.exports.remove = function(projectName, options) {
 module.exports.changeDirectory = function(projectName) {
   //check index of project
   //if it doesn't exist, return message
-  console.log('changeing directory to root of \"%s\" ', projectName);
+  console.log('Opening a new Terminal window at the root of \"%s\" '.green, projectName);
   if(this.findProject(projectName) <= -1){
-    console.log('Oops…\n  \"%s\" does not exist. \n   Try adding the project or check \"unwrap ls\" for available projects', projectName);
+    console.log('Oops…\n  \"%s\" does not exist. \n   Try adding the project or check \"unwrap ls\" for available projects'.red, projectName);
     return
   }
   var projectIndex = this.findProject(projectName);
