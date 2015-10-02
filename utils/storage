@@ -18,6 +18,9 @@ var persistData = JSON.parse(persistFile);
  */
 module.exports.list = function(option) {
 
+  if (persistData.projects.length <= 0) {
+    console.log('You don\'t have any project stored yet. Add one with \"unwrap add\"'.red);
+  };
 
   for (index in persistData.projects){
     var projectName = persistData.projects[index].project;
