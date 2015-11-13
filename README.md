@@ -141,6 +141,7 @@ unwrap open -h
 ```
 
 
+
 ## ROAD MAP
 Tab completion of project names
 
@@ -150,6 +151,22 @@ Tab completion of project names
 
 Windows compatibility - rewrite/ remove -t|--tab option for open 
 
+---
+# Known Issues
+### Permissions
+unwrap requires write permission to the default node_modules directory, which can cause issues on installation. To get unwrap working properly, you will need to run commands with sudo, or change permissions on `unwrap-storage`. To insatll with sudo:
+
+```bash
+#install unwrap
+sudo npm install -g unwrap-project
+
+#init unwrap
+sudo unwrap
+
+#set permissions on path to /unwrap-storage/
+sudo chmod -R 0777 /usr/lib/node_modules/unwrap-storage
+
+```
 # Uninstalling
 Uninstalling unwrap-project using npm uninstall -g , `npm uninstall -g unwrap-project`
 To remove the project *persist storage* remove the unwrap-storage directory insite node_modules at `/usr/local/lib/node_modules/ `
